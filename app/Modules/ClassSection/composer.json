@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/classsection",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "App\\Modules\\ClassSection\\Providers\\ClassSectionServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\Modules\\ClassSection\\": ""
+        }
+    }
+}

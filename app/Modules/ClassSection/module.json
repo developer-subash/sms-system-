@@ -1,0 +1,16 @@
+{
+    "name": "ClassSection",
+    "alias": "classsection",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "App\\Modules\\ClassSection\\Providers\\ClassSectionServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
