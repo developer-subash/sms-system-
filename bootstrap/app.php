@@ -27,6 +27,7 @@ $app->bind('path.public', function() {
     return __DIR__ . 'public/';
    });
 
+
 $app->withFacades();
 
 $app->withEloquent();

@@ -1,79 +1,43 @@
 <?php
-
 namespace App\Modules\ClassSection\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Class;
-
+use App\Modules\ClassSection\Interfaces\ClassInterface;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 class ClassSectionController extends BaseController
 {
     private $class;
-    /**
-         * Display a listing of the resource.
-     * @return Response
-     */
-    public function __construct()
+    
+    public function __construct(ClassInterface $iClass )
     {
-
+        $this->class = $iClass;
     }
 
-    public function index()
-    {
-        return view('classsection::index');
-    }
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('classsection::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
     public function store(Request $request)
     {
-       
-    }
-    /**
-     * Show the specified resource.
-     * @return Response
-     */
-    public function show()
-    {
-        return view('classsection::show');
+       try {
+            $data = $request->all(); 
+               
+            $result = $this->class->saveClass($data);     
+        }
+        catch (\Throwable $e) {
+            print_r($e->getMessage());
+        }
+
+        return response()->json([$result,'200','Data Added SuccessFully']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-    public function edit()
+    public function addSection(Request $request)
     {
-        return view('classsection::edit');
+        try {
+            $all = $request->all();
+            $result =  $this->class->saveSection($all);
+        }
+        catch (\Throwable $e) {
+            print_r($e->getMessage());
+        }
+       return response()->json([ $result, '200','section created successfully']);
     }
-
-    /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function update(Request $request)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
-    public function destroy()
-    {
-    }
+  
 }

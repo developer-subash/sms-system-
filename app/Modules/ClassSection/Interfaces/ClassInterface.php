@@ -7,6 +7,7 @@ interface ClassInterface
 {
 
     public function saveClass($data);
+    public function saveSection($data);
 
 
 }

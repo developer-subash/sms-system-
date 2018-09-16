@@ -3,3 +3,9 @@
 Homestead.json
 Homestead.yaml
 .env
+/node_modules
+/.vscode
+/.vagrant
+/storage/*.key
+
+

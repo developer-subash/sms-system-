@@ -5,6 +5,8 @@ namespace App\Modules\ClassSection\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\Facades\Config;
+use App\Modules\ClassSection\Interfaces\ClassInterface;
+use App\Modules\ClassSection\Repository\ClassRepository;
 
 class ClassSectionServiceProvider extends ServiceProvider
 {
@@ -36,7 +38,7 @@ class ClassSectionServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(ClassInterface::class, ClassRepository::class);
     }
 
     /**
