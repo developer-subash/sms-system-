@@ -2,6 +2,7 @@
     namespace App\Modules\Admin\Repository;
     use App\Modules\Admin\Interfaces\UserInterface;
     use App\Modules\Admin\Entities\User;
+    use App\Modules\Admin\Entities\Role;
     use App\Modules\Setting\Entities\Setting;
     use App\Modules\Common\traits\ResponseTrait;
     use Illuminate\Support\Facades\Hash; 
@@ -12,11 +13,13 @@
         use ResponseTrait;
         private $userModel;
         protected $settingModel;
-        public function __construct(User $userModel,Setting $settingModel)
+        protected $roleModel;
+        public function __construct(User $userModel,Setting $settingModel,Role $roleModel)
         {     
                 
             $this->userModel = $userModel;
             $this->settingModel = $settingModel;
+            $this->roleModel = $roleModel;
          
         }
 
@@ -24,11 +27,13 @@
         {   
            try {
             
+            $studentRoleId = $this->roleModel->where('name','student')->first()->id;
+            
             $running_year = $this->settingModel->where('type','running_year')->first()->description;
                     
             $section_id = $data['section_id'];
             $is_class_id_exits =  $this->userModel->where(['section_id' =>$section_id, 'year' => $running_year])->orderBy('created_at','desc')->first();
-          
+            
            $obj = new User();
            $obj->name = $data['name'];
            $obj->birthday = $data['birthday'];
@@ -53,7 +58,7 @@
             {           
             $obj->roll_no =  $data['roll_no'] = 1;
             $obj->save();
-            $obj->Roles()->attach($data['role_id']);
+            $obj->Roles()->attach($studentRoleId);
 
             return $obj;      
             }
@@ -64,11 +69,13 @@
               
               if(count($totlestudentsInEachClass) <= $maxstudentcapacityInEachClass)
               {
+                 
                 $obj->roll_no = $is_class_id_exits->roll_no + 1;
                 $obj->save();
-                $obj->Roles()->attach($data['role_id']);
+                $obj->Roles()->attach($studentRoleId);
                 return $obj; 
               } else {
+                 
                 $message = 'Oops.. Problem while adding Please Increase Totle Student Capacity To Each Section';
                 return $message;
               }                              

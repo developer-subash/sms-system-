@@ -29,6 +29,7 @@ $app->bind('path.public', function() {
 
 
 $app->withFacades();
+class_alias('Illuminate\Support\Facades\App', 'App');
 
 $app->withEloquent();
 
@@ -70,6 +71,9 @@ $app->middleware([
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+]);
+$app->routeMiddleware([
+    'check' => App\Http\Middleware\CheckRole::class,
 ]);
 
 /*

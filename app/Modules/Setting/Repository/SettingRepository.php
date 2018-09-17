@@ -38,8 +38,7 @@ public function updateSetting($data)
 		$result = $this->settingmodel->where('type','system_name')->first();
 		$result->description = $data['description'];	
 		$result->save();
-
-		
+	
 	}
 	catch(\Throwable $t){
 		print_r($t->getMessage());

@@ -3,7 +3,7 @@
 namespace App\Modules\Admin\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Modules\Admin\Entities\Role;
+use App\Modules\Admin\Entities\User;
 
 class Role extends Model
 {
@@ -11,7 +11,7 @@ class Role extends Model
 
     public function Users()
     {
-        return $this->belongsToMany(Role::class,'users_roles','role_id','user_id');
+        return $this->belongsToMany(User::class,'users_roles','role_id','user_id');
     }
 
 }

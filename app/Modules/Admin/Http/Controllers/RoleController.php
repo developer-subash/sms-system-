@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use App\Modules\Admin\Entities\Role;
 use App\Modules\Admin\Interfaces\RoleInterface;
+use Auth;
 
 class RoleController extends BaseController
 {
@@ -42,13 +43,14 @@ class RoleController extends BaseController
     {
         try {
 
+            print_r(Auth::user()->authentication_key);exit;
            $result = $this->iRole->listRoles();
            $response = [
 
             'status' => true,
             'data' => $result,
             'message' => 'role list retrieved successfully',
-        ];
+             ];
         }
         catch (\Throwable $e) {
             print_r($e->getMessage());

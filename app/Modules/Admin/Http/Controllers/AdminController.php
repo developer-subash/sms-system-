@@ -27,11 +27,11 @@ class AdminController extends BaseController
         $result = $this->iUser->RegisterUser($all);
         if(is_array($result))
         {
-            return response()->json(['messgae' => $result,401]);
+            return response()->json(['messgae' => $result,'msg' => 'User Added'],401);
             
         } else {
 
-            return response()->json([ 'data' => $result,'200','user added']);
+            return response()->json([ 'data' => $result],200);
         }
         
     }

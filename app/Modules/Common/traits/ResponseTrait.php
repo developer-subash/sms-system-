@@ -48,7 +48,7 @@ trait ResponseTrait {
 
     public function TotleStudentInEachClass()
     {
-       return $totleStudentsCapacity = 20;
+       return $totleStudentsCapacity = 19;
     }
 
 }
