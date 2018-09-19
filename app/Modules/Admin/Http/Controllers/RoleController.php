@@ -42,11 +42,9 @@ class RoleController extends BaseController
     public function listRoles(Request $request)
     {
         try {
-
             print_r(Auth::user()->authentication_key);exit;
            $result = $this->iRole->listRoles();
            $response = [
-
             'status' => true,
             'data' => $result,
             'message' => 'role list retrieved successfully',

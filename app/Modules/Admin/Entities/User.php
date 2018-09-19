@@ -7,9 +7,9 @@ use Illuminate\Auth\Authenticatable;
 use App\Modules\Admin\Entities\Role;
 use Illuminate\Contracts\Auth\Authenticatable as AuthContract;
 
-class User extends Model 
+class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    use Authenticatable;
+    use HasApiTokens,Authenticatable, Authorizable;
     // protected $table = 'users';
     protected $fillable = ['name','birthday','sex','religion','blood_group','permanent_address','phone','email','password','authentication_key','current_address','nationality','mother_tongue','cast_category','disability','known_allergy','parent_id'];
     // protected $hidden = [
@@ -25,8 +25,7 @@ class User extends Model
     }
 
     public function hasAnyRoles($roles)
-   {
-       
+   {      
        if(is_array($roles))
        {        
            foreach($roles as $role)
@@ -52,7 +51,7 @@ class User extends Model
        
        if($this->Roles()->where('name',$role)->first())
        {
-        return true;
+            return true;
        }
        return false;
    }

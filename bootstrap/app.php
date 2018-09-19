@@ -76,6 +76,7 @@ $app->routeMiddleware([
     'check' => App\Http\Middleware\CheckRole::class,
 ]);
 
+
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
@@ -86,6 +87,15 @@ $app->routeMiddleware([
 | totally optional, so you are not required to uncomment this line.
 |
 */
+
+// this is for lumen passwort authentication
+$app->register(Laravel\Passport\PassportServiceProvider::class);
+$app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
+
+$app->configure('auth');
+return $app;
+\Dusterio\LumenPassport\LumenPassport::routes(app());
+
 
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
